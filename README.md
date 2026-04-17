@@ -9,11 +9,11 @@
 This repository contains the `drift` framework, a decoupled **independent observer** system designed to bridge a reality gap in robotics. While traditional systems rely on self-reporting, this framework implements a *nothing personal* philosophy: an objective, impartial auditor that reconciles software commands with raw physical telemetry.
 
 <p align="center">
-  <img src="https://github.com/noe831/EARA/blob/00f474bc30872ad057bf09c5fe8ba2f0b5cdcf1d/assets/IntraOp3.png" width="600" title="Nothing Personal: Integrity for Medical Robotics">
+  <img src="https://github.com/noe831/EARA/blob/00f474bc30872ad057bf09c5fe8ba2f0b5cdcf1d/assets/IntraOp3.png" width="500" title="Nothing Personal: Integrity for Medical Robotics">
 </p>
 
 <details>
-<summary><b>Why <i>Nothing Personal</i>? (The Architectural Philosophy)</b>
+<summary><b>Why <i>Nothing Personal</i>? (The Architectural Mindset)</b>
 </summary>
 <br>In systems engineering, <i>nothing personal</i> is a philosophy of architectural impartiality.<br><br>
 
@@ -85,6 +85,10 @@ The framework provides a high-frequency audit log. In recent stress tests, the s
 [AUDIT] Stewardship Ratio (K): 1.00
 ```
 
+<p align="center">
+  <img src="https://github.com/noe831/drift/Fig1_realtime-audit.png" width="300" title="Real-Time Audit">
+</p>
+
 # Getting Started
 
 Built for the **Your Next Win IWD Virtual Summit 2026**, this project aims to empower engineers to build safer, more resilient systems.
@@ -107,3 +111,7 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+
+#### Attribution 
+
+This architectural framework and kinematic proof were independently developed by L. H.
