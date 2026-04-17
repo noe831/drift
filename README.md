@@ -86,7 +86,8 @@ The framework provides a high-frequency audit log. In recent stress tests, the s
 ```
 
 <p align="center">
-  <img src="https://github.com/noe831/drift/Fig1_realtime-audit.png" width="300" title="Real-Time Audit">
+  <img src="Fig2_realtime-audit.png" height="250" title="Real-Time Audit">
+  <img src="Fig1_envelope.png" height="250" title="Saftey Operating Envelope">
 </p>
 
 # Getting Started
