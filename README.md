@@ -8,6 +8,10 @@
 
 This repository contains the `drift` framework, a decoupled **independent observer** system designed to bridge a reality gap in robotics. While traditional systems rely on self-reporting, this framework implements a *nothing personal* philosophy: an objective, impartial auditor that reconciles software commands with raw physical telemetry.
 
+<p align="center">
+  <img src="https://github.com/noe831/EARA/blob/00f474bc30872ad057bf09c5fe8ba2f0b5cdcf1d/assets/IntraOp3.png" width="600" title="Nothing Personal: Integrity for Medical Robotics">
+</p>
+
 <details>
 <summary><b>Why <i>Nothing Personal</i>? (The Architectural Philosophy)</b>
 </summary>
