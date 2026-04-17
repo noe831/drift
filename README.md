@@ -23,6 +23,15 @@ In medical robotics, **state desynchronization** occurs when a system's internal
 * **Actual Data** (due to jitter, latency, or mechanical wear) records the arm at position $P_2$
 * **Risk:** In surgery, a 2mm drift is the difference between a successful biopsy and a clinical catastrophe
 
+** Technical Glossary: The Blueprint of Trust**
+To bridge the reality gap, `drift` implements a formal verification architecture based on the core pillars:
+
+| Term | Definition | Metric of Success |
+| :--- | :--- | :--- |
+| **Safe Operating Envelope ($\Omega$)** | Bounded manifold where the system maintains kinematic integrity | $\|det(J)\|>\epsilon$ |
+| **Stewardship Ratio ($\mathbb{K}$)** | Ratio of physical states verified by the independent auditor | $\mathbb{K} = 1.00$ (Target) |
+| **Deterministic Halt** | An inhibitor that intercepts commands | $\Delta t < 1ms$ |
+
 ### Solution: Independent Observer Pattern
 
 We solve this by decoupling the monitoring layer from the control layer. This ensures that the system's truth is never compromised by the complexity of its commands.
@@ -33,17 +42,32 @@ We solve this by decoupling the monitoring layer from the control layer. This en
 
 ### Implementation
 
-The core of this project is a telemetry auditor built in Python and rendered via a distributed GCP pipeline.
+The core of this project is a telemetry auditor built in Python.
+
+<details>
+<summary><b>View Technical Proofs (SVD & Jacobian Analysis)</b></summary>
+<br>
+
+To ensure objective oversight in highly regulated environments, the audit engine utilizes:
+* **Singular Value Decomposition (SVD):** Monitor the condition number $\kappa(J)$ of the system to ensure numerical stability
+* **Jacobian Determinant Analysis:** The observer calculates $|det(J)|$ in real-time to identify state desynchronization before physical drift manifests
+* **Deterministic Determinism:** By decoupling the hardware clock, achieve a reaction time ($\Delta t$) of **0.08ms**, fulfilling the safety-critical requirements of the independent observer pattern.
+</details>
+
 
 #### **Logic: Drift Formula**
 
 The observer calculates the Jacobian determinant $|det(J)|$ of the system in real-time. This metric represents the safe operating envelope. If the determinant approaches zero, indicating a singularity or state desynchronization, the system triggers a deterministic halt.
 
-#### Audit Trail
+#### Audit Trail: The Verifiable Receipt
 
 The framework provides a high-frequency audit log. In recent stress tests, the system achieved a Stewardship Ratio $(K)$ of 1.00, meaning every move was successfully audited against physical truth.
-* `DETERMINISTIC HALT TRIGGERED: metric=0.0000, dt=0.0868ms`
-* `Stewardship Ratio (K): 1.00`
+
+```bash
+# Validated Test Output:
+[AUDIT] DETERMINISTIC HALT TRIGGERED: metric=0.0000, dt=0.0868ms
+[AUDIT] Stewardship Ratio (K): 1.00
+```
 
 # Getting Started
 
