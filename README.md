@@ -9,11 +9,11 @@
 This repository contains the `drift` framework, a decoupled **independent observer** system designed to bridge a reality gap in robotics. While traditional systems rely on self-reporting, this framework implements a *nothing personal* philosophy: an objective, impartial auditor that reconciles software commands with raw physical telemetry.
 
 <details>
-<summary><b>Why *Nothing Personal*? (The Architectural Philosophy)</b>
+<summary><b>Why <i>Nothing Personal</i>? (The Architectural Philosophy)</b>
 </summary>
-In systems engineering, *nothing personal* is a philosophy of architectural impartiality. The system should never "trust" its own control loop.
+<br>In systems engineering, <i>nothing personal</i> is a philosophy of architectural impartiality.<br><br>
 
-We often assume a system's internal state is a source of truth, but in high-stakes robotics, a controller can be sincere but wrong. It executes a command and believes it is on target, while physical forces (drift) pull it off course. *Nothing personal* means the system refuses to trust its own internal story. By decoupling the observer, we ensure that the audit of the machine is objective and separated from the machine's intent. It's not just about data privacy - it's about data integrity.
+We often assume a system's internal state is a source of truth, but in high-stakes robotics, a controller can be sincere but wrong. It executes a command and believes it is on target, while physical forces (drift) pull it off course. <i>Nothing personal</i> means the system refuses to trust its own internal story. <br><br>By decoupling the observer (the auditor) from the controllter (the actor), we ensure that the audit of the machine is objective and separated from the machine's intent. It's not just about data privacy - it's about data integrity.
 </details>
 
 ### Problem: Reality Gap
@@ -37,19 +37,22 @@ The core of this project is a telemetry auditor built in Python and rendered via
 
 #### **Logic: Drift Formula**
 
-The observer calculates the distance ($\Delta$) between the software intent vector ($\vec{I}$) and the physical truth vector ($\vec{T}$):
-
-$$\Delta = \sqrt{(x_I - x_T)^2 + (y_I - y_T)^2 + (z_I - z_T)^2}$$
+The observer calculates the Jacobian determinant $|det(J)|$ of the system in real-time. This metric represents the safe operating envelope. If the determinant approaches zero, indicating a singularity or state desynchronization, the system triggers a deterministic halt.
 
 #### Audit Trail
 
-The system provides a terminal output designed for human oversight:
-* `[AUDIT] DRIFT DETECTED: 1.14mm | STATUS: NOMINAL`
-* `[AUDIT] DRIFT DETECTED: 2.05mm | STATUS: CRITICAL - INTERVENTION REQUIRED`
+The framework provides a high-frequency audit log. In recent stress tests, the system achieved a Stewardship Ratio $(K)$ of 1.00, meaning every move was successfully audited against physical truth.
+* `DETERMINISTIC HALT TRIGGERED: metric=0.0000, dt=0.0868ms`
+* `Stewardship Ratio (K): 1.00`
 
 # Getting Started
 
 Built for the **Your Next Win IWD Virtual Summit 2026**, this project aims to empower engineers to build safer, more resilient systems.
+
+**Core Components**
+* **`kinematic_verification_n.py` (The Trust-Core):** The primary logic for the observer
+* **`simulation.py` (The Demo):** The test harness used to simulate the reality gap and trigger a halt signal
+* **`drift_results_visual.png` (The Receipt):** The visual of sub-millisecond determinism
 
 ## Prerequisites
 * Python 3.12+
