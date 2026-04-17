@@ -16,6 +16,8 @@ This repository contains the `drift` framework, a decoupled **independent observ
 We often assume a system's internal state is a source of truth, but in high-stakes robotics, a controller can be sincere but wrong. It executes a command and believes it is on target, while physical forces (drift) pull it off course. <i>Nothing personal</i> means the system refuses to trust its own internal story. <br><br>By decoupling the observer (the auditor) from the controllter (the actor), we ensure that the audit of the machine is objective and separated from the machine's intent. It's not just about data privacy - it's about data integrity.
 </details>
 
+---
+
 ### Problem: Reality Gap
 
 In medical robotics, **state desynchronization** occurs when a system's internal logic and its physical position drift apart. 
@@ -23,7 +25,8 @@ In medical robotics, **state desynchronization** occurs when a system's internal
 * **Actual Data** (due to jitter, latency, or mechanical wear) records the arm at position $P_2$
 * **Risk:** In surgery, a 2mm drift is the difference between a successful biopsy and a clinical catastrophe
 
-** Technical Glossary: The Blueprint of Trust**
+**Technical Glossary: The Blueprint of Trust**
+
 To bridge the reality gap, `drift` implements a formal verification architecture based on the core pillars:
 
 | Term | Definition | Metric of Success |
@@ -31,6 +34,15 @@ To bridge the reality gap, `drift` implements a formal verification architecture
 | **Safe Operating Envelope ($\Omega$)** | Bounded manifold where the system maintains kinematic integrity | $\|det(J)\|>\epsilon$ |
 | **Stewardship Ratio ($\mathbb{K}$)** | Ratio of physical states verified by the independent auditor | $\mathbb{K} = 1.00$ (Target) |
 | **Deterministic Halt** | An inhibitor that intercepts commands | $\Delta t < 1ms$ |
+
+**Data Stewardship & Compliance**
+
+`Drift` is designed to provide objective system oversight in highly regulated environments. To achieve this, the architecture adheres to *IEEE Std 2890-2025 Recommended Practice for Provenance of Indigenous Peoples' Data* [https://standards.ieee.org/ieee/2890/10318/](https://standards.ieee.org/ieee/2890/10318/) for data management, applicable to high-stakes telemetry.
+
+* **Stewardship Ratio ($\mathbb{K}$):** We define Kuleana ($\mathbb{K}$) as the architectural responsibility to maintain a transparent system. This ratio measures the temporal density of auditable versus opaque states.
+* **Verifiable Receipt:** Compliance with the *IEEE* standard ensures that telemetry data is managed with the stewardship required for global clinical environments, providing a verifiable receipt for every movement.
+
+---
 
 ### Solution: Independent Observer Pattern
 
